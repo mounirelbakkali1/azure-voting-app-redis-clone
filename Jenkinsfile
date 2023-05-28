@@ -7,11 +7,17 @@ pipeline {
             echo "$GIT_BRANCH"
          }
       }
-      stage('Docker Build') {
-         steps {
-            pwsh(script: 'ls')
-            pwsh(script: 'pwd')
-         }
-      }
+      stage("Docker BUILD"){
+            steps{
+                pwsh(script: "docker images -a")
+                pwsh(script: """
+                    cd myApp/
+                    docker images -a 
+                    docker build -t jenkins/jenkins .
+                    docker images -a 
+                    cd ..
+                    """)
+            }
+        }
    }
 }
