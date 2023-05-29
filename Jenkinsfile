@@ -1,6 +1,8 @@
 pipeline {
    agent any
-
+   environment {
+      DOCKER = '/user/bin/docker'
+   }
    stages {
       stage('Verify Branch') {
          steps {
@@ -9,12 +11,12 @@ pipeline {
       }
       stage("Docker BUILD"){
             steps{
-                sh("docker images -a")
+                sh("${DOCKER_HOME} images -a")
                 sh("""
                     cd myApp/
-                    docker images -a 
-                    docker build -t jenkins/jenkins .
-                    docker images -a 
+                    ${DOCKER_HOME} images -a 
+                    ${DOCKER_HOME} build -t jenkins/jenkins .
+                    ${DOCKER_HOME} images -a 
                     cd ..
                     """)
             }
