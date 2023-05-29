@@ -1,7 +1,7 @@
 pipeline {
    agent any
    environment {
-      DOCKER = '/user/bin/docker'
+      DOCKER_HOME = '/user/bin/docker'
    }
    stages {
       stage('Verify Branch') {
